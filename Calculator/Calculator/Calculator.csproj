@@ -45,6 +45,7 @@
     <Compile Include="MainMenu.cs" />
     <Compile Include="Operations\Addition.cs" />
     <Compile Include="Operations\Exit.cs" />
+    <Compile Include="Operations\Multiplication.cs" />
     <Compile Include="Operations\Operation.cs" />
     <Compile Include="Operations\Subtraction.cs" />
     <Compile Include="Program.cs" />

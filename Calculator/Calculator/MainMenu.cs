@@ -24,6 +24,7 @@ namespace Calculator
                     {
                         new Addition(),
                         new Subtraction(),
+                        new Multiplication(),
                         new Exit()
                     };
                 }
