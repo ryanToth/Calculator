@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Calculator.Operations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,30 +7,50 @@ using System.Threading.Tasks;
 
 namespace Calculator
 {
-    public class MainMenu : IDisposable
+    public class MainMenu
     {
-        private string separatorLine = "* * * * * * * * * * * * * * * * * * * * *";
+        public static string SeparatorLine = "* * * * * * * * * * * * * * * * * * * * *";
         private List<Operation> operations;
 
-        public MainMenu(List<Operation> operations)
+        private static MainMenu instance = null;
+        public static MainMenu Instance
         {
-            this.operations = operations;
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new MainMenu();
+                    instance.operations = new List<Operation>()
+                    {
+                        new Addition(),
+                        new Subtraction(),
+                        new Exit()
+                    };
+                }
+
+                return instance;
+            }
+        }
+
+        private MainMenu()
+        {
+
         }
 
         public bool Exit { get; set; }
 
         public void Print()
         {
-            Console.Out.WriteLine(separatorLine);
+            Console.Out.WriteLine(SeparatorLine);
             Console.Out.WriteLine(" Welcome to Sidney's Awesome Calculator");
-            Console.Out.WriteLine(separatorLine);
+            Console.Out.WriteLine(SeparatorLine);
 
             for (int i = 0; i < this.operations.Count; i++)
             {
-                PrintOperation(this.operations.ElementAt(i).ToString(), i + 1);
+                this.PrintOperation(this.operations.ElementAt(i).Name, i + 1);
             }
 
-            Console.Out.WriteLine(separatorLine);
+            Console.Out.WriteLine(SeparatorLine);
             Console.Out.WriteLine(string.Empty);
             this.TakeInput();
         }
@@ -42,14 +63,23 @@ namespace Calculator
 
             if (int.TryParse(input, out int choice) && choice <= operations.Count && choice >= 0)
             {
-                this.operations.ElementAt(choice-1).Function();
+                Operation operation = this.operations.ElementAt(choice - 1);
+
+                Console.Out.WriteLine(SeparatorLine);
+                Console.Out.WriteLine(operation.Name);
+                Console.Out.WriteLine(SeparatorLine);
+                Console.Out.WriteLine(string.Empty);
+
+                operation.Execute();
             }
             else
             {
                 this.PrintError();
             }
 
-            Console.Out.WriteLine(string.Empty);
+            this.WaitForInputToContinue();
+
+            Console.Out.WriteLine(Environment.NewLine);
         }
 
         private void PrintError()
@@ -61,12 +91,12 @@ namespace Calculator
         {
             Console.Out.WriteLine($"\t{num}. {name}");
         }
-        
-        public void Dispose()
+
+        private void WaitForInputToContinue()
         {
-            Console.Out.WriteLine(separatorLine);
-            Console.Out.WriteLine("Good-Bye!");
-            Console.Out.WriteLine(separatorLine);
+            Console.Out.WriteLine(Environment.NewLine);
+            Console.Out.Write("Press any key to continue...");
+            Console.ReadKey();
         }
     }
 }

@@ -43,7 +43,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainMenu.cs" />
-    <Compile Include="Operation.cs" />
+    <Compile Include="Operations\Addition.cs" />
+    <Compile Include="Operations\Exit.cs" />
+    <Compile Include="Operations\Operation.cs" />
+    <Compile Include="Operations\Subtraction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
