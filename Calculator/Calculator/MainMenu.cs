@@ -80,7 +80,7 @@ namespace Calculator
 
             this.WaitForInputToContinue();
 
-            Console.Out.WriteLine(Environment.NewLine);
+            //Console.Out.WriteLine(Environment.NewLine);
         }
 
         private void PrintError()

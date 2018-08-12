@@ -17,5 +17,29 @@ namespace Calculator.Operations
         }
 
         public abstract void Execute();
+
+        protected bool TryGetNumbers(out List<int> numbers)
+        {
+            numbers = new List<int>();
+            Console.Out.WriteLine("Enter numbers separated by a comma");
+            string numberstring = Console.In.ReadLine();
+            string[] numberline = numberstring.Split(',');
+            Console.Out.WriteLine(string.Empty);
+            
+            for (int i = 0; i < numberline.Length; i = i + 1)
+            {
+                if (!int.TryParse(numberline[i], out int number))
+                {
+                    Console.Out.WriteLine("Please Enter Integers");
+                    return false;
+                }
+                else
+                {
+                    numbers.Add(number);
+                }
+            }
+          
+            return true;
+        }
     }
 }

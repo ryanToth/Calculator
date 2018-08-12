@@ -10,29 +10,19 @@ namespace Calculator.Operations
     {
         public override void Execute()
         {
-            Console.Out.WriteLine("Enter numbers separated by a comma");
-            string numbers = Console.In.ReadLine();
-            string[] numberline = numbers.Split(',');
-            Console.Out.WriteLine(string.Empty);
             int result = 0;
-
-            for (int i = 0; i < numberline.Length; i = i + 1)
+            if (this.TryGetNumbers(out List<int> numbers))
             {
-                if (!int.TryParse(numberline[i], out int subtracts))
-                {
-                    Console.Out.WriteLine("Please Enter Integers");
-                    return;
-                }
-                else
+                for (int i = 0; i < numbers.Count; i = i + 1)
                 {
                     if (i != 0)
                     {
-                        subtracts = -subtracts;
+                        numbers[i] = -numbers[i];
                     }
-                    result = result + subtracts;
+                    result = result + numbers[i];
                 }
+                Console.Out.WriteLine("Difference: " + result);
             }
-            Console.Out.WriteLine("Difference: " + result);
         }
     }
 }

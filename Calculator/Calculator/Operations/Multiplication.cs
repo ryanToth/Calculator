@@ -10,25 +10,15 @@ namespace Calculator.Operations
     {
         public override void Execute()
         {
-            Console.Out.WriteLine("Enter numbers separated by a comma");
-            string numbers = Console.In.ReadLine();
-            string[] numberline = numbers.Split(',');
-            Console.Out.WriteLine(string.Empty);
             int result = 1;
-
-            for (int i = 0; i < numberline.Length; i = i + 1)
+            if (this.TryGetNumbers(out List<int> numbers))
             {
-                if (!int.TryParse(numberline[i], out int products))
+                for (int i = 0; i < numbers.Count; i= i+1)
                 {
-                    Console.Out.WriteLine("Please Enter Integers");
-                    return;
+                    result = result * numbers[i];
                 }
-                else
-                {
-                    result = result * products;
-                }
-            }
-            Console.Out.WriteLine("Product: " + result);
+                Console.Out.WriteLine("Product: " + result);
+            } 
         }
     }
 }
